@@ -1,0 +1,1 @@
+#entorno de produccion cunado el app este en un servidor alojado 
