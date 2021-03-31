@@ -5,6 +5,9 @@ from applications.departamento.models import Departamento # traer el forenkey a 
 class Habilidades(models.Model):
     habilidad = models.CharField('Habilidad', max_length=50)
 
+    class Meta:
+        verbose_name = 'Habilidad'
+        verbose_name_plural ='Habilidades Empleados'
 
     def __str__(self):
         # pylint: disable=maybe-no-member
@@ -25,7 +28,7 @@ class Persona (models.Model):
     last_name = models.CharField('Apellido', max_length=60)
     job = models.CharField('Trabajo', max_length=1, choices=JOB_CHOICES)
     departamento = models.ForeignKey(Departamento, on_delete=models.CASCADE)# traer el forenkey a la tabla de partamento relacion (1-*)
-    habilidades = models.ManyToManyField(Habilidades)
+    habilidades = models.ManyToManyField(Habilidades)# relacion de muchos a muchos 
     
     class Meta:
         verbose_name = 'Mi Empleado'
