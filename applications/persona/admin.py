@@ -5,7 +5,7 @@ from .models import Persona,Habilidades
 
 admin.site.register(Habilidades)
 
-#decoradores
+#decoradores para retornar cambios
 
 class EmpleadoAdmin(admin.ModelAdmin):
     list_display = (
@@ -14,5 +14,10 @@ class EmpleadoAdmin(admin.ModelAdmin):
         'departamento',
         'job'
     )
+
+    search_fields = ('first_name',)
+    list_filter = ('job','habilidades')
+
+    filter_horizontal = ('habilidades',) # buscador de muchos a muchos
 
 admin.site.register(Persona,EmpleadoAdmin)
