@@ -12,7 +12,6 @@ class EmpleadoAdmin(admin.ModelAdmin):
         'first_name',
         'last_name',
         'departamento',
-        'habilidades',
         'job'
     )
 

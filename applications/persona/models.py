@@ -19,9 +19,9 @@ class Persona (models.Model):
     #consta de iterables de exactamente dos elementos
     JOB_CHOICES = (
         ('0', 'CONTADOR'),
-        ('0', 'ADMINISTRADOR'),
-        ('0', 'ECONOMISTA'),
-        ('0', 'OTRO'),
+        ('1', 'ADMINISTRADOR'),
+        ('2', 'ECONOMISTA'),
+        ('3', 'OTRO'),
     ) 
        
     first_name = models.CharField('Nombre', max_length=60) 
