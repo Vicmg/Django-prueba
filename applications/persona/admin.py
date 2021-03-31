@@ -3,4 +3,17 @@ from .models import Persona,Habilidades
 # Register your models here.
 
 admin.site.register(Persona)
-admin.site.register(Habilidades)
+
+
+#decoradores
+
+class EmpleadoAdmin(admin.ModelAdmin):
+    list_display = (
+        'first_name',
+        'last_name',
+        'departamento',
+        'habilidades',
+        'job'
+    )
+
+admin.site.register(Habilidades, EmpleadoAdmin)

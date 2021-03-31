@@ -28,6 +28,7 @@ class Persona (models.Model):
     last_name = models.CharField('Apellido', max_length=60)
     job = models.CharField('Trabajo', max_length=1, choices=JOB_CHOICES)
     departamento = models.ForeignKey(Departamento, on_delete=models.CASCADE)# traer el forenkey a la tabla de partamento relacion (1-*)
+    avatar = models.ImageField(upload_to='empleado', blank=True, null=True)
     habilidades = models.ManyToManyField(Habilidades)# relacion de muchos a muchos 
     
     class Meta:
