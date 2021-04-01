@@ -10,4 +10,5 @@ class ListAllEmpleados(ListView):
     # atributos
     template_name = "persona/list_all.html"
     model = Persona
+    context_object_name = 'lista'
 
