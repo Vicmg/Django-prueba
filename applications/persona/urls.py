@@ -1,10 +1,8 @@
 from django.contrib import admin
 from django.urls import path, re_path, include
 
-def DesdePersona(self):
-    print("=========Desde Apss Persona===========")
-    
+from  . import views
+
 urlpatterns = [
-    # Incluimos las urls de la app departamento 
-    path('persona/',DesdePersona),
+    path('listar-todo-empleado/',views.ListAllEmpleados.as_view),
 ]
