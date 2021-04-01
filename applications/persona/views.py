@@ -12,3 +12,9 @@ class ListAllEmpleados(ListView):
     model = Persona
     context_object_name = 'lista'
 
+# 2. Listar todos los empleados que pertenecen al area de una empresa   
+
+class ListByAreaEmpleado (ListView):
+    """ Lista de empleados de un area"""
+    template_name = 'persona/list_all.html'
+    model = Persona
