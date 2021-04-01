@@ -21,7 +21,7 @@ class ListarPrueba (ListView): # enlista lo que tengo en mi base de datos
 class PruebaCreateView(CreateView): # crea un nuevo objeto con una respuesta generada por plantilla en el html
     model = Prueba
     template_name = "home/create.html"
-    fields = ['titulo','subtitulo','cantidad'] # tengo que llamar los cambos del modelo de mi base de datos
+    fields = ['titulo','subtitulo','cantidad'] # tengo que llamar los campos del modelo de mi base de datos
 
 
 
