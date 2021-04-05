@@ -25,13 +25,27 @@ class ListByAreaEmpleado (ListView):
         return lista
 
 # 2. Listar todos los empleados por trabajo 
-
 class ListByJobEmpleado (ListView):
     """ Lista de empleados por trabajo"""
     template_name = 'persona/list_job.html'
     def get_queryset(self):
 
         lista = Persona.objects.filter(
-            job = 'CONTADOR'
+            job = ''
         )
         return lista
+
+# 2. Listar los empleados por pabalabra clave 
+class ListEmpleadosByKword(ListView):
+    template_name = 'persona/by_word.html'
+    context_object_name = 'empleados'
+
+    def get_queryset(self):
+        print ('************************')
+        palabra_clave = self.request.GET.get("kword", "")
+        lista =  Persona.objects.filter(  
+            first_name = palabra_clave
+        )
+        print('Lista de resultad :', lista)
+        return lista
+        
