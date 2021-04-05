@@ -23,3 +23,15 @@ class ListByAreaEmpleado (ListView):
             departamento__short_name = area
         )
         return lista
+
+# 2. Listar todos los empleados por trabajo 
+
+class ListByJobEmpleado (ListView):
+    """ Lista de empleados por trabajo"""
+    template_name = 'persona/list_job.html'
+    def get_queryset(self):
+
+        lista = Persona.objects.filter(
+            job = 'CONTADOR'
+        )
+        return lista

@@ -6,4 +6,5 @@ from  . import views
 urlpatterns = [
     path('listar-todo-empleados/', views.ListAllEmpleados.as_view()),
     path('listar-by-area/<shortname>', views.ListByAreaEmpleado.as_view()),
+    path('listar-by-job/', views.ListByJobEmpleado .as_view()),
 ]
