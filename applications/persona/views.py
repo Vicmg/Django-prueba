@@ -42,8 +42,8 @@ class ListEmpleadosByKword(ListView):
 
     def get_queryset(self):
         print ('************************')
-        palabra_clave = self.request.GET.get("kword", "")
-        lista =  Persona.objects.filter(  
+        palabra_clave = self.request.GET.get("kword", "")# este metodo que captura todas las solicitudes q han enviado al servidor
+        lista =  Persona.objects.filter(  # aqui busca la solicitud en el modelo
             first_name = palabra_clave
         )
         print('Lista de resultad :', lista)
