@@ -9,6 +9,7 @@ from .models import Persona
 class ListAllEmpleados(ListView):
     # atributos
     template_name = "persona/list_all.html"
+    paginate_by = 4
     model = Persona
     
 # 2. Listar todos los empleados que pertenecen al area de una empresa   
