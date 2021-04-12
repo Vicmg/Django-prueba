@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Listar todos los Empelados</h1>
-    {{object_list}}
+
     <ul>
         
         {% for e in object_list  %}
@@ -16,5 +16,16 @@
         {% endfor %}
             
     </ul>
+
+    {% if is_paginated %}
+        <ul class="pagination">
+
+            {% for i in paginator.page_range %}
+                <li class="page item">
+                    <a href="?page={{i}}" class="page-linl">{{i}}</a>
+                </li>
+            {% endfor %}         
+        </ul>  
+    {% endif %}
 </body>
 </html>

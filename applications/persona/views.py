@@ -49,4 +49,22 @@ class ListEmpleadosByKword(ListView):
         )
         print('Lista de resultad :', lista)
         return lista
+
+# 2. Listar habilidades de un empleado many_to_may
+
+class ListHabilidadesEmpleado(ListView):
+    template_name = 'persona/habilidades.html'
+    context_object_name = 'habilidades'
+
+    def get_queryset(self):
         
+        persona = Persona.objects.get(id=1)#para retornar un valor de many_to_many hay q indicar un valor inicial 
+        return persona.habilidades.all()
+
+    def get_queryset(self):
+        id_clave = self.request.GET.get("kword", "")# este metodo que captura todas las solicitudes q han enviado al servidor
+        lista =  Persona.objects.filter(  # aqui busca la solicitud en el modelo
+            id = id_clave
+        )
+        print('Lista de resultad :', lista)
+        return lista
