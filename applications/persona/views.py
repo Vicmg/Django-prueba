@@ -79,7 +79,8 @@ class EmpleadoDetailView(DetailView):
         context['titulo']='Empleado del mes'
         return context
     
-class EmpleadoCreateView(CreateView): # se usa tres parametros model,template_name,fields
+class EmpleadoCreateView(CreateView): # funciona co mo un formulario se usa tres parametros model,template_name,fields
     model = Persona
     template_name = "persona/add.html"
-
+    fields = ('__all__')
+    
