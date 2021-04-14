@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import (ListView)
+from django.views.generic import (ListView, DetailView, CreateView)
 from .models import Persona
 
 # Create your views here.
@@ -25,7 +25,7 @@ class ListByAreaEmpleado (ListView):
         )
         return lista
 
-# 2. Listar todos los empleados por trabajo 
+# 3. Listar todos los empleados por trabajo 
 class ListByJobEmpleado (ListView):
     """ Lista de empleados por trabajo"""
     template_name = 'persona/list_job.html'
@@ -36,7 +36,7 @@ class ListByJobEmpleado (ListView):
         )
         return lista
 
-# 2. Listar los empleados por pabalabra clave 
+# 4. Listar los empleados por pabalabra clave 
 class ListEmpleadosByKword(ListView):
     template_name = 'persona/by_word.html'
     context_object_name = 'empleados'
@@ -50,7 +50,7 @@ class ListEmpleadosByKword(ListView):
         print('Lista de resultad :', lista)
         return lista
 
-# 2. Listar habilidades de un empleado many_to_may
+# 5. Listar habilidades de un empleado many_to_may
 
 class ListHabilidadesEmpleado(ListView):
     template_name = 'persona/habilidades.html'
@@ -68,3 +68,18 @@ class ListHabilidadesEmpleado(ListView):
         )
         print('Lista de resultad :', lista)
         return lista
+
+class EmpleadoDetailView(DetailView):
+    model = Persona
+    template_name = "persona/detailview.html"
+    
+    '''para enviar una variable extra al template, una variable q no se contemple dentro de los atributos del modelo '''
+    def get_context_data(self, **kwargs):
+        context = super(EmpleadoDetailView, self).get_context_data(**kwargs)
+        context['titulo']='Empleado del mes'
+        return context
+    
+class EmpleadoCreateView(CreateView): # se usa tres parametros model,template_name,fields
+    model = Persona
+    template_name = "persona/add.html"
+
