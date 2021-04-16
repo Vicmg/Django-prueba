@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import (ListView, DetailView, CreateView)
+from django.views.generic import (ListView, DetailView, CreateView, TemplateView)
 from .models import Persona
+from django.urls import reverse_lazy
 
 # Create your views here.
 
@@ -78,9 +79,14 @@ class EmpleadoDetailView(DetailView):
         context = super(EmpleadoDetailView, self).get_context_data(**kwargs)
         context['titulo']='Empleado del mes'
         return context
-    
-class EmpleadoCreateView(CreateView): # funciona co mo un formulario se usa tres parametros model,template_name,fields
-    model = Persona
+
+
+class SuccessView(TemplateView):
+    template_name = "persona/success.html"
+
+class EmpleadoCreateView(CreateView): # se usa 4 parametros model,template_name,fields,succes(redirecciona)
     template_name = "persona/add.html"
-    fields = ('__all__')
+    model = Persona
+    fields = ('__all__') # all trae todos los atributos del modelo
+    success_url = reverse_lazy("persona_app:correcto")#redirecciona la pagina una vez termine el formulario 
     

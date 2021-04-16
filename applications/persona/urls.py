@@ -3,6 +3,8 @@ from django.urls import path, re_path, include
 
 from  . import views
 
+app_name = "persona_app"
+
 urlpatterns = [
     path('listar-todo-empleados/', views.ListAllEmpleados.as_view()),
     path('listar-by-area/<shortname>', views.ListByAreaEmpleado.as_view()),
@@ -11,5 +13,8 @@ urlpatterns = [
     path('listar-habilidades/', views.ListHabilidadesEmpleado.as_view()),
     path('ver.empleado/<pk>', views.EmpleadoDetailView.as_view()),# se agrega un parametro <pk> identificador para indicarle que esta relacionado con el modelo
     path('add-empleado', views.EmpleadoCreateView.as_view()),
-
+    path(
+        'success', 
+        views.SuccessView.as_view(),
+        name= 'correcto'),
 ]
