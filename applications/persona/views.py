@@ -87,6 +87,18 @@ class SuccessView(TemplateView):
 class EmpleadoCreateView(CreateView): # se usa 4 parametros model,template_name,fields,succes(redirecciona)
     template_name = "persona/add.html"
     model = Persona
-    fields = ('__all__') # all trae todos los atributos del modelo
+    fields = [
+        'first_name',
+        'last_name',
+        'job',
+        'departamento',
+        'habilidades'
+    ] # all trae todos los atributos del modelo
     success_url = reverse_lazy("persona_app:correcto")#redirecciona la pagina una vez termine el formulario 
     
+    def form_valid(self, form):
+        empleado = form.save(commit=False)
+        empleado.full_name = empleado.first_name + ' ' + empleado.last_name
+        empleado.save()
+        print(empleado)
+        return super(EmpleadoCreateView,self).form_valid(form)
