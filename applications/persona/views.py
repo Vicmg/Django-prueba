@@ -145,6 +145,6 @@ class EmpleadoDeleteView(DeleteView):
         self.object.delete()
         return HttpResponseRedirect(success_url)
 
-
+#Ejemplo para git hub en vs code (borrar)
 class CLASS_NAME(TemplateView):
     template_name = "TEMPLATE_NAME"
