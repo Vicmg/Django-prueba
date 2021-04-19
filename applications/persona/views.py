@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import (ListView, DetailView, CreateView, TemplateView)
+from django.views.generic import (ListView, DetailView, CreateView, TemplateView, UpdateView, DeleteView)
 from .models import Persona
 from django.urls import reverse_lazy
 
@@ -58,8 +58,8 @@ class ListHabilidadesEmpleado(ListView):
     context_object_name = 'habilidades'
 
     def get_queryset(self):
-        
-        persona = Persona.objects.get(id=1)#para retornar un valor de many_to_many hay q indicar un valor inicial 
+
+        persona = Persona.objects.get(id=1)#para retornar un valor de many_to_many hay q indicar un valor inicial
         return persona.habilidades.all()
 
     def get_queryset(self):
@@ -73,17 +73,17 @@ class ListHabilidadesEmpleado(ListView):
 class EmpleadoDetailView(DetailView):
     model = Persona
     template_name = "persona/detailview.html"
-    
     '''para enviar una variable extra al template, una variable q no se contemple dentro de los atributos del modelo '''
     def get_context_data(self, **kwargs):
         context = super(EmpleadoDetailView, self).get_context_data(**kwargs)
         context['titulo']='Empleado del mes'
         return context
 
-
+# controlador de empleado agregado
 class SuccessView(TemplateView):
     template_name = "persona/success.html"
 
+# controlador para crear un empleado y guardarlo en el modelo
 class EmpleadoCreateView(CreateView): # se usa 4 parametros model,template_name,fields,succes(redirecciona)
     template_name = "persona/add.html"
     model = Persona
@@ -93,12 +93,54 @@ class EmpleadoCreateView(CreateView): # se usa 4 parametros model,template_name,
         'job',
         'departamento',
         'habilidades'
-    ] # all trae todos los atributos del modelo
-    success_url = reverse_lazy("persona_app:correcto")#redirecciona la pagina una vez termine el formulario 
-    
+    ] # __all__ trae todos los atributos del modelo
+    success_url = reverse_lazy("persona_app:correcto")#redirecciona la pagina una vez termine el formulario
+
     def form_valid(self, form):
         empleado = form.save(commit=False)
         empleado.full_name = empleado.first_name + ' ' + empleado.last_name
         empleado.save()
         print(empleado)
         return super(EmpleadoCreateView,self).form_valid(form)
+
+# controlador para actualizar el modelo
+
+class EmpleadoUpdateView(UpdateView):
+    model = Persona
+    template_name = "persona/update.html"
+    fields = [
+        'first_name',
+        'last_name',
+        'job',
+        'departamento',
+        'habilidades'
+    ]
+    success_url = reverse_lazy("persona_app:correcto")
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        print("++++++METODO POST+++++++")
+        print (request.POST)
+        print (request.POST['last_name'])
+        return super().post(request, *args, **kwargs)
+
+    def form_valid(self, form):
+
+        return super(EmpleadoUpdateView,self).form_valid(form)
+
+# Borrar un empleado 
+
+class EmpleadoDeleteView(DeleteView):
+    model = Persona
+    template_name = "persona/delete.html"
+    success_url = reverse_lazy("persona_app:correcto")
+
+    def delete(self, request, *args, **kwargs):
+    """
+    Call the delete() method on the fetched object and then redirect to the
+    success URL.
+    """
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        self.object.delete()
+        return HttpResponseRedirect(success_url)

@@ -17,4 +17,12 @@ urlpatterns = [
         'success', 
         views.SuccessView.as_view(),
         name= 'correcto'),
+    path(
+        'update-empleado/<pk>/', 
+        views.EmpleadoUpdateView.as_view(),
+        name= 'correcto'),
+     path(
+        'delete-empleado/<pk>/', 
+        views.EmpleadoDeleteView.as_view(),
+        name= 'correcto'),
 ]
