@@ -144,3 +144,7 @@ class EmpleadoDeleteView(DeleteView):
         success_url = self.get_success_url()
         self.object.delete()
         return HttpResponseRedirect(success_url)
+
+
+class CLASS_NAME(TemplateView):
+    template_name = "TEMPLATE_NAME"
