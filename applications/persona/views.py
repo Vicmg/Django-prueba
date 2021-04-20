@@ -146,6 +146,6 @@ class EmpleadoDeleteView(DeleteView):
         return HttpResponseRedirect(success_url)
 
 #Ejemplo para git hub en vs code (borrar)
-#comentario 2
+#comentario 3
 class CLASS_NAME(TemplateView):
     template_name = "TEMPLATE_NAME"
