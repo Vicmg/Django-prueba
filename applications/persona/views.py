@@ -5,28 +5,28 @@ from django.urls import reverse_lazy
 
 # Create your views here.
 
-# 1. Listar todos los empleados de la Empresa 
+# 1. Listar todos los empleados de la Empresa
 
 class ListAllEmpleados(ListView):
     # atributos
     template_name = "persona/list_all.html"
     paginate_by = 4
     model = Persona
-    
-# 2. Listar todos los empleados que pertenecen al area de una empresa   
+
+# 2. Listar todos los empleados que pertenecen al area de una empresa
 
 class ListByAreaEmpleado (ListView):
     """ Lista de empleados de un area"""
-    template_name = 'persona/list_by_area.html'     
-    
+    template_name = 'persona/list_by_area.html'
+
     def get_queryset(self):
         area = self.kwargs['shortname']
-        lista =  Persona.objects.filter (  #Filtro  indica con que caracteristica en particular devuelva una lista 
+        lista =  Persona.objects.filter (  #Filtro  indica con que caracteristica en particular devuelva una lista
             departamento__short_name = area
         )
         return lista
 
-# 3. Listar todos los empleados por trabajo 
+# 3. Listar todos los empleados por trabajo
 class ListByJobEmpleado (ListView):
     """ Lista de empleados por trabajo"""
     template_name = 'persona/list_job.html'
@@ -37,7 +37,7 @@ class ListByJobEmpleado (ListView):
         )
         return lista
 
-# 4. Listar los empleados por pabalabra clave 
+# 4. Listar los empleados por pabalabra clave
 class ListEmpleadosByKword(ListView):
     template_name = 'persona/by_word.html'
     context_object_name = 'empleados'
@@ -128,24 +128,16 @@ class EmpleadoUpdateView(UpdateView):
 
         return super(EmpleadoUpdateView,self).form_valid(form)
 
-# Borrar un empleado 
+# Borrar un empleado
 
 class EmpleadoDeleteView(DeleteView):
     model = Persona
     template_name = "persona/delete.html"
     success_url = reverse_lazy("persona_app:correcto")
-
+    '''metodo def delete (Estudiar)'''
     def delete(self, request, *args, **kwargs):
-    """
-    Call the delete() method on the fetched object and then redirect to the
-    success URL.
-    """
-        self.object = self.get_object()
-        success_url = self.get_success_url()
-        self.object.delete()
-        return HttpResponseRedirect(success_url)
 
-#Ejemplo para git hub en vs code (borrar)
-#comentario 3
-class CLASS_NAME(TemplateView):
-    template_name = "TEMPLATE_NAME"
+        self.object = self.get_object()
+        print("++++++METODO POST+++++++")
+        self.object.delete()
+        return super(EmpleadoDeleteView, self).post(request, *args, **kwargs)
