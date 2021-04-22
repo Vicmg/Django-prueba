@@ -138,6 +138,6 @@ class EmpleadoDeleteView(DeleteView):
     def delete(self, request, *args, **kwargs):
 
         self.object = self.get_object()
-        print("++++++METODO POST+++++++")
+        print("++++++METODO Delete+++++++")
         self.object.delete()
         return super(EmpleadoDeleteView, self).post(request, *args, **kwargs)
