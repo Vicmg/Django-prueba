@@ -1,10 +1,10 @@
 from django.db import models
 
 # Create your models here.
-
+#hola
 
 class Departamento(models.Model):
-    
+
     name = models.CharField('nombre', max_length=50, blank=True, editable=False)
     short_name = models.CharField('nombre corto', max_length=20, unique=True)
     anulate = models.BooleanField('anulado', default=False)
@@ -20,4 +20,3 @@ class Departamento(models.Model):
     def __str__(self):
         # pylint: disable=maybe-no-member
         return  str(self.id) + '-' + self.name + '-' + self.short_name
- 
