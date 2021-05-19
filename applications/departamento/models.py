@@ -15,9 +15,9 @@ class Departamento(models.Model):
         verbose_name_plural = 'Areas de la Empresa'#mostrar el nombre en prural
         unique_together = ('name','short_name')
         ordering = ['name']
-    
+
 
     def __str__(self):
         # pylint: disable=maybe-no-member
         return  str(self.id) + '-' + self.name + '-' + self.short_name
-        
+ 
