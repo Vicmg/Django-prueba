@@ -14,15 +14,15 @@ urlpatterns = [
     path('ver.empleado/<pk>', views.EmpleadoDetailView.as_view()),# se agrega un parametro <pk> identificador para indicarle que esta relacionado con el modelo
     path('add-empleado', views.EmpleadoCreateView.as_view()),
     path(
-        'success', 
+        'success',
         views.SuccessView.as_view(),
         name= 'correcto'),
     path(
-        'update-empleado/<pk>/', 
+        'update-empleado/<pk>/',
         views.EmpleadoUpdateView.as_view(),
         name= 'correcto'),
-     path(
-        'delete-empleado/<pk>/', 
+    path(
+        'delete-empleado/<pk>/',
         views.EmpleadoDeleteView.as_view(),
         name= 'correcto'),
 ]

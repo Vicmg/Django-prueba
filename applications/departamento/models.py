@@ -4,6 +4,7 @@ from django.db import models
 #hola
 #hola3
 
+
 class Departamento(models.Model):
 
     name = models.CharField('nombre', max_length=50, blank=True, editable=False)
