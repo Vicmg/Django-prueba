@@ -29,3 +29,4 @@ class NewDepartamentoView (FormView):
             departamento = depart # se reasigna a la variable de la instancia q se creó
         )
         return super(NewDepartamentoView, self).form_valid(form)
+        #comentario views
