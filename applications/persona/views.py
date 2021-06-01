@@ -97,7 +97,8 @@ class EmpleadoCreateView(CreateView): # se usa 4 parametros model,template_name,
     success_url = reverse_lazy("persona_app:correcto")#redirecciona la pagina una vez termine el formulario
 
     def form_valid(self, form):
-        empleado = form.save(commit=False)
+        #logica del proceso
+        empleado = form.save(commit=False)#para no hacer dolbe guardado, crear la instacia para empleado q va ala BD
         empleado.full_name = empleado.first_name + ' ' + empleado.last_name
         empleado.save()
         print(empleado)
@@ -135,9 +136,9 @@ class EmpleadoDeleteView(DeleteView):
     template_name = "persona/delete.html"
     success_url = reverse_lazy("persona_app:correcto")
     '''metodo def delete (Estudiar)'''
-    def delete(self, request, *args, **kwargs):
+    # def delete(self, request, *args, **kwargs):
 
-        self.object = self.get_object()
-        print("++++++METODO Delete+++++++")
-        self.object.delete()
-        return super(EmpleadoDeleteView, self).post(request, *args, **kwargs)
+    #     self.object = self.get_object()
+    #     print("++++++METODO Delete+++++++")
+    #     self.object.delete()
+    #     return super(EmpleadoDeleteView, self).post(request, *args, **kwargs)

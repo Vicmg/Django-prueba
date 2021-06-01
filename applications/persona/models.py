@@ -37,6 +37,7 @@ class Persona (models.Model):
     habilidades = models.ManyToManyField(Habilidades)# relacion de muchos a muchos
     hoja_vida =RichTextField()
 
+
     class Meta:
         verbose_name = 'Mi Empleado'
         verbose_name = 'Empleados de la Empresa'

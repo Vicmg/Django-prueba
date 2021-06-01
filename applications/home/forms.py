@@ -6,19 +6,19 @@ from .models import Prueba # se importa el modelo que tiene los campos
 class PruebaForm(forms.ModelForm): #crea la clase del form
 
     class Meta:
-        model = Prueba #se llama el modelo dela BD
+        model = Prueba #se llama el modelo de la BD
         fields = (# los atributos de la BD
             "titulo",
             "subtitulo",
             "cantidad",
         )
-        # widgets{
-        #     'titulo': forms.TextInput(
-        #         attrs={
-        #             'placeholder':'Ingrese texto aqui',
-        #         }
-        #     )
-        # }
+        widgets = {
+            'titulo': forms.TextInput(
+                attrs={
+                    'placeholder':'Ingrese texto aqui',
+                }
+            )
+        }
 
     def clean_cantidad(self): # se crea el metodo  que valida los campos
 

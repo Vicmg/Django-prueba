@@ -22,8 +22,8 @@ class ListarPrueba (ListView): # enlista lo que tengo en mi base de datos
 class PruebaCreateView(CreateView): # crea un nuevo objeto con una respuesta generada por plantilla en el html
     template_name = "home/create.html"
     model = Prueba
-    form_class = PruebaForm # se conecta el form con el createview llamando el nombre de la clase
-    success_url = '/'
+    form_class = PruebaForm # se conecta el form.py con el createview llamando el nombre de la clase
+    success_url ='/'
 
 
 
