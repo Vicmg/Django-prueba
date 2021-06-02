@@ -5,8 +5,11 @@ from django.views.generic import TemplateView, ListView, CreateView
 from .models import Prueba
 from .forms import  PruebaForm
 
-class PruebaView (TemplateView): # sireve para mostrar un template al usuario
-    template_name ='prueba.html'
+class PruebaView (TemplateView): # sirve para mostrar un template al usuario
+    template_name ='home/prueba.html'
+
+class ResumenFoundationView (TemplateView): # sirve para mostrar un template al usuario
+    template_name ='home/resumen_foundation.html'
 
 class PruebaListView (ListView): # sirve para traer un alista de caracteres
     template_name ='home/lista.html'
