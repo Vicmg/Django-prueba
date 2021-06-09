@@ -3,7 +3,11 @@ from django.views.generic import (ListView, DetailView, CreateView, TemplateView
 from .models import Persona
 from django.urls import reverse_lazy
 
-# Create your views here.
+# vista de pagina de inicio de pantalla
+
+class inicioView(TemplateView):
+    template_name = 'inicio.html'
+
 
 # 1. Listar todos los empleados de la Empresa
 

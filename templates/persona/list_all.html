@@ -1,31 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Listar todos los Empelados</h1>
+{% extends 'base.html'%}
 
+{% block content %}
+{% include 'includes/header.html' %}
+
+<div class="grid-container">
+    <div>
+        <h1>Lista de empleados</h1>
+        <div>
+            aqui va 
+        </div>
+    </div>
+
+    <h1>Listar todos los Empelados</h1>
     <ul>
-        
+
         {% for e in object_list  %}
             <li>{{ e }}</li>
         {% endfor %}
-            
-    </ul>
-<!-- Paginacion en html -->
-    {% if is_paginated %}
-        <ul class="pagination">
 
-            {% for i in paginator.page_range %}
-                <li class="page item">
-                    <a href="?page={{i}}" class="page-linl">{{i}}</a>
-                </li>
-            {% endfor %}         
-        </ul>  
-    {% endif %}
-</body>
-</html>
+    </ul>
+
+<!-- Paginacion en html -->
+{% if is_paginated %}
+
+    <ul class="pagination">
+
+        {% for i in paginator.page_range %}
+            <li class="page item">
+                <a href="?page={{i}}" class="page-linl">{{i}}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endif %}
+
+{% endblock content %}
+
+
+
