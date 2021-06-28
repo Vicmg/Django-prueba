@@ -1,11 +1,44 @@
-<h1>detail view empleado {{ titulo }}</h1>
+{% extends 'base.html'%}
 
-{{persona}}
+{% load static %}
 
-<h2>Resultado del empleado:</h2>
+{% block title %}
+    {{ object.first_name }}
+{% endblock title %}
 
-<p>{{persona.first_name}}</p>
-<p>{{persona.last_name}}</p>
-<p>{{persona.job}}</p>
-<p>{{persona.departamento}}</p>
-<p>{{persona.habilidades}}</p>
+{% block content %}
+
+{% include 'includes/header.html' %}
+<div class="grid-container">
+    <div class="grid-x grid-margin-x align-center">
+        <div class="cell large-4 card" style="width: 300px; margin-top:40px">
+            <div class="card-divider">
+                <!-- es una propiedad del modelo empleado que recupera el siguente valor del diccionario 
+                y muestra lo que hay en choices-->
+                {{ persona.get_job_display }}
+            </div>
+            <!-- selecciona la imagen q asignamos al empleado sino muestra una imagen de la carpeta static  -->
+            {% if persona.avatar %}
+                <img src="{{ persona.avatar.url }}">
+            {% else %}
+                <img src="{% static 'img/astro1.jpg' %}">
+            {% endif %}
+
+            <div class="card-section">
+                <h4>{{ persona.full_name }}</h4>
+                <p>{{ persona.last_name }}</p>
+                <p>{{ persona.departamento.short_name }}</p>
+                <!-- habilidades many to many-->
+                <p><span class="label">Habilidades:</span></p>
+                <ul class="vertical-menu">
+                    <!-- devuelve un objeto recuperando todos los datos q tiene habilidades y lo devuelve como una lista -->
+                    {% for h in persona.habilidades.all %}
+                        <li>{{ h.habilidad }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+

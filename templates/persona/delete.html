@@ -1,6 +1,27 @@
-<h1>Eliminar</h1>
+{% extends 'base.html' %}
+<!-- Eliminar empleado en la seccion del menu administrar-->
 
-<form method="POST">{% csrf_token %}
-    <p>¿ Desea Eliminar este empleado ?</p>
-    <input type="submit" value="delete" title="Eliminar">
-</form> 
+{% block title %}
+    Eliminar Empleado
+{% endblock title %}
+
+{% block content %}
+    {% include 'includes/header.html' %}
+    <!-- se declara los div para llamar el framework de foundation y se manipule mejor -->
+    <div class="grid-container">
+        <div class="grid-x">
+            <h1 class= "cell">Eliminar Empleado: {{ object.full_name }}</h1>
+            <form class="cell" method="POST">{% csrf_token %}
+
+                <div class="callout secondary">
+                    <h5>¿Desea Eliminar este empleado?</h5>
+                    <button type="submit" class="alert button">Confirmar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+

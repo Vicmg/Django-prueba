@@ -1,13 +1,10 @@
 from django.db import models
 
 # Create your models here.
-#hola
-#hola3
-
 
 class Departamento(models.Model):
 
-    name = models.CharField('nombre', max_length=50, blank=True, editable=False)
+    name = models.CharField('nombre', max_length=50, blank=True)
     short_name = models.CharField('nombre corto', max_length=20, unique=True)
     anulate = models.BooleanField('anulado', default=False)
 

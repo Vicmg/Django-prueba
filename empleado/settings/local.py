@@ -19,7 +19,7 @@ DATABASES = {
         'PASSWORD': 'operacionbd',
         'HOST': 'localhost',
         'PORT': '5432',
-        
+
     }
 }
 
@@ -30,6 +30,8 @@ DATABASES = {
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS =  [os.path.join(BASE_DIR, "static")]
-#
+
+MEDIA_URL ='/media/' # en donde se va genera las imagenes url en la carpeta media
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")# se direcciona la carpeta donde se va almacenar las imagenes
 
 

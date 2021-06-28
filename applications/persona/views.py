@@ -1,27 +1,37 @@
 from django.shortcuts import render
 from django.views.generic import (ListView, DetailView, CreateView, TemplateView, UpdateView, DeleteView)
-from .models import Persona
 from django.urls import reverse_lazy
-
+from .models import Persona
+#forms para personalizar nuevo empleado 
+from .forms import EmpleadoForm # es como se llama la clase que se creo en forms.py
 # vista de pagina de inicio de pantalla
 
 class inicioView(TemplateView):
     template_name = 'inicio.html'
 
 
-# 1. Listar todos los empleados de la Empresa
+# 1. Listar y buscar todos los empleados de la Empresa
 
 class ListAllEmpleados(ListView):
     # atributos
     template_name = "persona/list_all.html"
     paginate_by = 4
-    model = Persona
+
+    def get_queryset(self):
+        palabra_clave = self.request.GET.get("kword", "")# este metodo que captura todas las solicitudes q han enviado al servidor
+        lista =  Persona.objects.filter(  # aqui busca la solicitud en el modelo
+            #el icontains sirve para encontrar similitudes en la cadena que se le ingresa
+            #ejemplo : Victor = Vic
+            first_name__icontains=palabra_clave
+        )
+        return lista
 
 # 2. Listar todos los empleados que pertenecen al area de una empresa
 
 class ListByAreaEmpleado (ListView):
     """ Lista de empleados de un area"""
     template_name = 'persona/list_by_area.html'
+    context_object_name = 'empleados'# es un atributo que redefine el object_list y usa una varaible de contextexto para diferenciar 
 
     def get_queryset(self):
         area = self.kwargs['shortname']
@@ -29,6 +39,16 @@ class ListByAreaEmpleado (ListView):
             departamento__short_name = area
         )
         return lista
+
+# Vista logica del template admin
+class ListEmpleadosAdmin (ListView):
+
+    template_name = 'persona/lista_empleados.html'
+    paginate_by = 10
+    ordering = "first_name"
+    context_object_name = 'empleados'# es un atributo que redefine el object_list y usa una varaible de contextexto para diferenciar 
+    model = Persona
+
 
 # 3. Listar todos los empleados por trabajo
 class ListByJobEmpleado (ListView):
@@ -91,18 +111,13 @@ class SuccessView(TemplateView):
 class EmpleadoCreateView(CreateView): # se usa 4 parametros model,template_name,fields,succes(redirecciona)
     template_name = "persona/add.html"
     model = Persona
-    fields = [
-        'first_name',
-        'last_name',
-        'job',
-        'departamento',
-        'habilidades'
-    ] # __all__ trae todos los atributos del modelo
-    success_url = reverse_lazy("persona_app:correcto")#redirecciona la pagina una vez termine el formulario
+    form_class = EmpleadoForm #redirige a la clase q creamos en el forms.py
+    # __all__ trae todos los atributos del modelo
+    success_url = reverse_lazy("persona_app:empleados_admin")#redirecciona la pagina una vez termine el formulario
 
     def form_valid(self, form):
         #logica del proceso
-        empleado = form.save(commit=False)#para no hacer dolbe guardado, crear la instacia para empleado q va ala BD
+        empleado = form.save(commit=False)#para no hacer doble guardado, crear la instacia para empleado q va a la BD
         empleado.full_name = empleado.first_name + ' ' + empleado.last_name
         empleado.save()
         print(empleado)
@@ -120,7 +135,7 @@ class EmpleadoUpdateView(UpdateView):
         'departamento',
         'habilidades'
     ]
-    success_url = reverse_lazy("persona_app:correcto")
+    success_url = reverse_lazy("persona_app:empleados_admin")
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
@@ -138,7 +153,7 @@ class EmpleadoUpdateView(UpdateView):
 class EmpleadoDeleteView(DeleteView):
     model = Persona
     template_name = "persona/delete.html"
-    success_url = reverse_lazy("persona_app:correcto")
+    success_url = reverse_lazy("persona_app:empleados_admin")
     '''metodo def delete (Estudiar)'''
     # def delete(self, request, *args, **kwargs):
 

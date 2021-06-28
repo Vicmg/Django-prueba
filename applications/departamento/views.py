@@ -1,12 +1,17 @@
 from django.shortcuts import render
+from django.views.generic import ListView
 from django.views.generic.edit import FormView
-
 from applications.persona.models import Persona #se importa el modelo Persona
 from .models import Departamento
 from .forms import NewDepartamentoForm
 
 '''El Formview trabaja con formularios que no estan vinculados con un modelo
-directamente pero trabaja con mas de  un  modelo a si ves'''
+directamente pero trabaja con mas de  un  modelo a su ves'''
+
+class DepartamentoListView(ListView):
+    template_name ='departamento/lista.html'
+    model = Departamento
+    context_object_name = 'departamentos'
 
 class NewDepartamentoView (FormView):
     template_name = 'departamento/new_departamento.html'

@@ -1,9 +1,53 @@
-<h1>Agregar Empleado</h1>
+{% extends 'base.html' %}
+<!-- En este template se ejecuta la logica del boton "registrar nuevo" que esta en la parte superiror derecha -->
+{% block title %}
+    Agregar Empleado
+{% endblock title %}
 
-<form method="POST">{% csrf_token %}
-    {{form.as_p}}
-    <button type="submit">agregar</button>
-</form>
+{% block content %}
+{% include 'includes/header.html' %}
+<div class="grid-container">
+    <div class="grid-x">
+        <h1 class="cell">Registrar Empleado</h1>
+        <form class="cell grid-x grid-margin-x" method="POST" enctype="multipart/form-data">{% csrf_token %}
+            <!-- este div con label son traidos de fundation y sirven para generar formularios -->
+            <div class="medium-6 cell">
+                <label>Nombre:
+                    {{form.first_name}}
+                </label>
+            </div>
+            <div class="medium-6 cell">
+                <label>Apellido:
+                    {{form.last_name}}
+                </label>
+            </div>
+            <div class="medium-6 cell">
+                <label>Trabajo:
+                    {{form.job}}
+                </label>
+            </div>
+            <div class="medium-6 cell">
+                <label>Departamento:
+                    {{form.departamento}}
+                </label>
+            </div>
+            <div class="medium-12 cell">
+                <label>Habilidades:
+                    {{form.habilidades}}
+                </label>
+            </div>
+            <div class="medium-12 cell">
+                <label>Foto:
+                    {{form.avatar}}
+                </label>
+            </div>
+            <div class="medium-12 cell">
+                <button type="submit" class="button success">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}
 
 {% block blockname %}
 <!--sirve para crear fragmentos de la  platilla base y no vovler a repetir-->

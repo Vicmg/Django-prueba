@@ -1,6 +1,46 @@
-<h1>datos del Empleado actualizado</h1>
+{% extends 'base.html' %}
+<!-- actualizar empleado en la seccion del menu administrar-->
+{% block title %}
+    editar empleados
+{% endblock title %}
 
-<form method="POST">{% csrf_token %}
-    {{form.as_p}}
-    <input type="submit", value="update">
-</form>
+{% block content %}
+{% include 'includes/header.html' %}
+<div class="grid-container">
+    <div class="grid-x">
+        <h1 class="cell">Modificar Empleado</h1>
+    <div class="cell">
+        <form class="grid-x grid-margin-x" method="POST">{% csrf_token %}
+            <div class="cell large-6">
+                <label>Nombres:
+                    {{ form.first_name }}
+                </label>
+            </div>
+            <div class="cell large-6">
+                <label>Apellido:
+                    {{ form.last_name }}
+                </label>
+            </div>
+            <div class="cell large-6">
+                <label>Trabajo:
+                    {{ form.job }}
+                </label>
+            </div>
+            <div class="cell large-6">
+                <label>Area:
+                    {{ form.departamento }}
+                </label>
+            </div>
+            <div class="cell large-6">
+                <label>Habilidades:
+                    {{ form.habilidades }}
+                </label>
+            </div>
+            <div class="cell">
+                <button type="submit" class="success button">Guardar</button>
+            </div>
+        </form>
+    </div>
+    </div>
+</div>
+{% endblock content %}
